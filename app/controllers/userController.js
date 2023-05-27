@@ -55,8 +55,19 @@ userContoller.login = (req,res)=>{
         })
 }
 
-userContoller.account = (res,req)=>{
-    
+userContoller.account = (req,res)=>{
+    res.json(req.user)
+}
+
+userContoller.update = (req,res)=>{
+    const body = req.body
+    User.findOneAndUpdate({_id:req.user._id},body,{new:true,runValidators:true})
+        .then((user)=>{
+            res.json(user)
+        })
+        .catch((err)=>{
+            res.json({error: "Invalid updation",message:"Invalidate email or password",errors:err})
+        })
 }
 
 module.exports = userContoller
