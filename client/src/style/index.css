@@ -1,0 +1,184 @@
+/*-----------------------------------------------------------------------------------
+
+    Template Name: Expenses-App
+    Template URI: 
+    Description: This is Next js template
+    Author: Suriya
+    Author URI: http://expensesApp.com
+    Version: 1.0
+
+-----------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------
+
+     CSS INDEX
+    ===================
+    1.Global CSS
+    2.Common CSS
+    3.Header CSS
+    4.Home Pgae CSS
+
+-----------------------------------------------------------------------------------*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --font-Playfair: "Playfair Display", serif;
+  --font-Poppins: "Poppins", sans-serif;
+  --body-bg: #ebebeb;
+  --green: #18d26e;
+  --black: #151a17;
+  --drak-gray: #797d7b;
+  --gray: #ebebeb;
+  --para-color: #aaaaaa;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+body {
+  box-sizing: border-box !important;
+  font-family: var(--font-Poppins);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/*----------------------------------------------------*/
+/* 1.Global CSS */
+/*----------------------------------------------------*/
+
+.gre-cl {
+  color: var(--green);
+}
+.bla-cl {
+  color: var(--black);
+}
+.gry-cl {
+  color: var(--gray);
+}
+.dr-gry-cl {
+  color: var(--drak-gray);
+}
+p {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--para-color);
+}
+h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--black);
+}
+h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--black);
+}
+h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+}
+h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+}
+h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--black);
+}
+h6 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+/*----------------------------------------*/
+/* 2.Common CSS */
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/* 3.Header CSS */
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/* 4.Home Page CSS */
+/*----------------------------------------*/
+
+
+/*----------------------------------------*/
+/* 5.Resume Page CSS */
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/* 6.Portfolio Page CSS */
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/* 7.Services Page CSS */
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/* 8.Contact Page CSS */
+/*----------------------------------------*/
+
+
+/*----------------------------------------*/
+/*Responsive CSS */
+/*----------------------------------------*/
+@media (max-width: 1440px) {
+}
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 26px;
+  }
+  h3 {
+    font-size: 22px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  h5 {
+    font-size: 18px;
+  }
+  h6 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+}
+
+@media (max-width: 425px) {
+}
+
+@media (max-width: 375px) {
+}
+
+@media (max-width: 320px) {
+}
+
+/*--------------------------------*/
+/* .End CSS
+/*--------------------------------*/
