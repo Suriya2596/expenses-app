@@ -28,24 +28,26 @@
 :root {
   --font-Playfair: "Playfair Display", serif;
   --font-Poppins: "Poppins", sans-serif;
-  --body-bg: #ebebeb;
-  --green: #18d26e;
-  --black: #151a17;
-  --drak-gray: #797d7b;
+  --yellow: #FECE2F;
+  --black: #100E0E;
+  --drak-gray: #232220;
   --gray: #ebebeb;
+  --white: #fdfcfa;
   --para-color: #aaaaaa;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
   transition: all 0.3s ease;
 }
 
 body {
   box-sizing: border-box !important;
   font-family: var(--font-Poppins);
+  background-color: var(--black);
+  padding: 0;
+  margin: 0;
+  color: var(--white);
 }
 
 html {
@@ -55,17 +57,22 @@ html {
 /*----------------------------------------------------*/
 /* 1.Global CSS */
 /*----------------------------------------------------*/
-
-.gre-cl {
-  color: var(--green);
+.bg-cl{
+  background-color: var(--black);
 }
-.bla-cl {
+.primary-cl {
+  color: var(--yellow);
+}
+.white-cl{
+  color: var(--white);
+}
+.black-cl {
   color: var(--black);
 }
-.gry-cl {
+.gray-cl {
   color: var(--gray);
 }
-.dr-gry-cl {
+.dr-gray-cl {
   color: var(--drak-gray);
 }
 p {
@@ -74,34 +81,34 @@ p {
   color: var(--para-color);
 }
 h1 {
-  font-size: 42px;
+  font-size: 46px;
   font-weight: 800;
-  color: var(--black);
+  color: var(--white);
 }
 h2 {
-  font-size: 20px;
+  font-size: 38px;
   font-weight: 800;
-  color: var(--black);
+  color: var(--white);
 }
 h3 {
-  font-size: 18px;
+  font-size: 32px;
   font-weight: 800;
-  color: var(--black);
+  color: var(--white);
 }
 h4 {
-  font-size: 16px;
+  font-size: 28px;
   font-weight: 700;
-  color: var(--black);
+  color: var(--white);
 }
 h5 {
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 600;
-  color: var(--black);
+  color: var(--white);
 }
 h6 {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
-  color: var(--black);
+  color: var(--white);
 }
 
 /*----------------------------------------*/
@@ -148,22 +155,22 @@ h6 {
 
 @media (max-width: 767px) {
   h1 {
-    font-size: 30px;
+    font-size: 38px;
   }
   h2 {
-    font-size: 26px;
+    font-size: 30px;
   }
   h3 {
-    font-size: 22px;
+    font-size: 28px;
   }
   h4 {
-    font-size: 20px;
+    font-size: 24px;
   }
   h5 {
-    font-size: 18px;
+    font-size: 20px;
   }
   h6 {
-    font-size: 16px;
+    font-size: 20px;
   }
 }
 
