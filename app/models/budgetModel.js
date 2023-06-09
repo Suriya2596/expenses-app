@@ -12,6 +12,6 @@ const budgetSchema = new Schema({
     }
 },{timestamps:true})
 
-const Budget = mongoose.Model("Budget",budgetSchema)
+const Budget = mongoose.model("Budget",budgetSchema)
 
 module.exports = Budget
