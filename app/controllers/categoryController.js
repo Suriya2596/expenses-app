@@ -39,7 +39,7 @@ categoryController.show = (req,res)=>{
 categoryController.update = (req,res)=>{
     const body = req.body
     const id = req.params.id
-    Category.findOneAndUpdate({_id:id,user:req.user._Id},body,{new:true,runValidators:true})
+    Category.findOneAndUpdate({_id:id,user:req.user._id},body,{new:true,runValidators:true})
         .then((data)=>{
             res.json(data)
         })

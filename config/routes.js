@@ -16,19 +16,19 @@ routes.post("/api/user/account",authentication,userContoller.account)
 routes.put("/api/user/update",authentication,userContoller.update)
 
 // category routes
-routes.post("/api/user/category",authentication,categoryController.create)
-routes.get("/api/user/category",authentication,categoryController.list)
-routes.get("/api/user/category/:id",authentication,categoryController.show)
-routes.put("/api/user/category/id",authentication,categoryController.update)
-routes.delete("/api/user/category/id",authentication,authorization,categoryController.destroy)
+routes.post("/api/category",authentication,categoryController.create)
+routes.get("/api/category",authentication,categoryController.list)
+routes.get("/api/category/:id",authentication,categoryController.show)
+routes.put("/api/category/:id",authentication,categoryController.update)
+routes.delete("/api/category/:id",authentication,authorization,categoryController.destroy)
 
 
 // category routes
-routes.post("/api/user/budget",authentication,budgetController.create)
-routes.get("/api/user/budget",authentication,budgetController.list)
-routes.get("/api/user/budget/:id",authentication,budgetController.show)
-routes.put("/api/user/budget/id",authentication,budgetController.update)
-routes.delete("/api/user/budget/id",authentication,authorization,budgetController.destory)
+routes.post("/api/budget",authentication,budgetController.create)
+routes.get("/api/budget",authentication,budgetController.list)
+routes.get("/api/budget/:id",authentication,budgetController.show)
+routes.put("/api/budget/:id",authentication,budgetController.update)
+routes.delete("/api/budget/:id",authentication,authorization,budgetController.destory)
 
 
 
