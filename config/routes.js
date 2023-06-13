@@ -33,10 +33,10 @@ routes.put("/api/budget/:id",authentication,budgetController.update)
 routes.delete("/api/budget/:id",authentication,authorization,budgetController.destory)
 
 // expenses routes
-routes.post("/api/userr/expenses",authentication,expensesController.create)
-routes.get("/api/userr/expenses",authentication,expensesController.list)
-routes.get("/api/userr/expenses/:id",authentication,expensesController.show)
-routes.put("/api/userr/expenses/:id",authentication,expensesController.update)
-routes.delete("/api/userr/expenses/:id",authentication,authorization,expensesController.destroy)
+routes.post("/api/expenses",authentication,expensesController.create)
+routes.get("/api/expenses",authentication,expensesController.list)
+routes.get("/api/expenses/:id",authentication,expensesController.show)
+routes.put("/api/expenses/:id",authentication,expensesController.update)
+routes.delete("/api/expenses/:id",authentication,authorization,expensesController.destroy)
 
 module.exports = routes
