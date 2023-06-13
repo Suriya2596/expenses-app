@@ -43,7 +43,7 @@ export default function NavBar() {
   ]
 
   return (
-    <Card className="fixed top-4 left-4 h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+    <Card className="w-[100%] h-[100%] m-4 p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="blue-gray">
           Expenses App

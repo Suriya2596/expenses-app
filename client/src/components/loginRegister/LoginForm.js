@@ -3,8 +3,11 @@ import {
   Card,
   Input,
 } from "@material-tailwind/react";
+import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = React.useState("")
   const [password, setPassword] = React.useState("")
 
@@ -45,7 +48,16 @@ const LoginForm = () => {
       const data = {
         email, password
       }
-      console.log(data)
+      axios.post("http://localhost:3400/api/user/login",data)
+       .then((response)=>{
+        const data = response.data
+        localStorage.setItem("token",JSON.stringify(data))
+        navigate("/")
+       })
+       .catch((err)=>{
+        console.log(err)
+       })
+      // console.log(data)
       resolve()
     }
   }
