@@ -53,12 +53,14 @@ export default function NavBar() {
         {
           linksNav?.map((eleLink, el) => {
             return (
-              <ListItem key={el}>
-                <ListItemPrefix>
-                  {eleLink.icon()}
-                </ListItemPrefix>
-                <Link to={eleLink.path}>{eleLink.name}</Link>
-              </ListItem>
+              <Link key={el} to={eleLink.path}>
+                <ListItem >
+                  <ListItemPrefix>
+                    {eleLink.icon()}
+                  </ListItemPrefix>
+                  {eleLink.name}
+                </ListItem>
+              </Link>
             )
           })
         }
