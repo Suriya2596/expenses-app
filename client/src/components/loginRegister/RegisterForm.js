@@ -5,6 +5,7 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 export default function RegisterForm() {
   return (
@@ -37,11 +38,11 @@ export default function RegisterForm() {
         </button>
         <Typography color="gray" className="mt-4 text-center font-normal">
           Already have an account?{" "}
-          <p
+          <Link to={"/login"}
             className="font-medium text-[#FECE2F] transition-colors hover:text-blue-700"
           >
             Sign In
-          </p>
+          </Link>
         </Typography>
       </form>
     </Card>
