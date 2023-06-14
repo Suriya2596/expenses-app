@@ -1,12 +1,14 @@
 const express = require("express")
 const routes = express.Router()
 
+// middleware
+const {authentication,authorization} = require("../app/middlewares/authentication")
+
 // controller
 const userContoller = require("../app/controllers/userController")
-const {authentication,authorization} = require("../app/middlewares/authentication")
 const categoryController = require("../app/controllers/categoryController")
 const budgetController = require("../app/controllers/budgetController")
-
+const expensesController = require("../app/controllers/expensesController")
 
 // routes
 // user routes
@@ -30,6 +32,11 @@ routes.get("/api/budget/:id",authentication,budgetController.show)
 routes.put("/api/budget/:id",authentication,budgetController.update)
 routes.delete("/api/budget/:id",authentication,authorization,budgetController.destory)
 
-
+// expenses routes
+routes.post("/api/expenses",authentication,expensesController.create)
+routes.get("/api/expenses",authentication,expensesController.list)
+routes.get("/api/expenses/:id",authentication,expensesController.show)
+routes.put("/api/expenses/:id",authentication,expensesController.update)
+routes.delete("/api/expenses/:id",authentication,authorization,expensesController.destroy)
 
 module.exports = routes

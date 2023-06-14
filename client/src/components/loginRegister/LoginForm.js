@@ -4,7 +4,7 @@ import {
   Input,
 } from "@material-tailwind/react";
 import axios from "axios"
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const navigate = useNavigate()
@@ -13,6 +13,12 @@ const LoginForm = () => {
 
   const [formError, setFormError] = React.useState({})
   const formErr = {}
+
+  React.useEffect(()=>{
+    if(localStorage.getItem("token")){
+      navigate("/")
+    }
+  },[])
 
   const verifyEmail = (value) => {
     var emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -98,9 +104,9 @@ const LoginForm = () => {
           </button>
           <p className="mt-4 text-center font-normal">
             New to Daily Expenses?{" "}
-            <span className="font-medium text-[#FECE2F] transition-colors hover:text-blue-700">
+            <Link to={"/register"} className="font-medium text-[#FECE2F] transition-colors hover:text-blue-700">
               Sign Up
-            </span>
+            </Link>
           </p>
         </form>
       </Card>
