@@ -67,18 +67,5 @@ export default function NavBar() {
         </List>
       </Card>
     </>
-              <Link key={el} to={eleLink.path}>
-                <ListItem >
-                  <ListItemPrefix>
-                    {eleLink.icon()}
-                  </ListItemPrefix>
-                  {eleLink.name}
-                </ListItem>
-              </Link>
-            )
-          })
-        }
-      </List>
-    </Card>
   );
 }
