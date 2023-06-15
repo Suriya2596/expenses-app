@@ -6,7 +6,7 @@ const BaseURL = "http://localhost:3400/api"
 const {token} = localStorage.getItem("token") && JSON.parse(localStorage.getItem("token"))
 
 export const listUserData = createAsyncThunk("user/listUserData", async ()=>{
-    const response = await axios.get(`${BaseURL}/user`,token)
+    const response = await axios.get(`${BaseURL}/user`,Headers)
     return response.data
 })
 
