@@ -1,40 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { listUserData, updateUserData } from "./UserAction";
+import {createSlice} from "@reduxjs/toolkit"
+import { registerUser,loginUser,accountUser,updateUser } from "./UserAction"
 
-
-const userSlice = createSlice({
+const UserSlice = createSlice({
     name:"User",
     initialState:{
-        user:{},
-        loading:false,
+        laoding:false,
         error:null,
+        user:{},
+        register:{},
+        login:{},
+        token:""
     },
     reducers:{},
-    extraReducers: (builder)=>{
+    extraReducers : (builder)=>{
         builder
-        .addCase(listUserData.pending,(state,action)=>{
-            state.loading = true
+        .addCase(registerUser.pending,(state)=>{
+            state.laoding = true
         })
-        .addCase(listUserData.fulfilled,(state,action)=>{
-            state.loading = false,
-            state.user = action.payload
+        .addCase(registerUser.fulfilled,(state,action)=>{
+            state.laoding = false
+            state.error = null
+            state.register=action.payload
         })
-        .addCase(listUserData.rejected,(state,action)=>{
-            state.error = action.error.message
-        })
-        // update user
-        .addCase(updateUserData.loading,(state,action)=>{
-            state.loading = true
-        })
-        .addCase(updateUserData.fulfilled,(state,action)=>{
-            state.loading  = false
-            state.user = action.payload
-        })
-        .addCase(updateUserData.rejected,(state,action)=>{
-            state.loading = false
-            state.error = action.error.message
+        .addCase(registerUser.rejected,(state,action)=>{
+            state.laoding = false
+            state.error=action.payload
         })
     }
 })
 
-export default userSlice.reducer
+
+export default UserSlice.reducer
