@@ -5,8 +5,11 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios"
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from "react-redux"
+import { loginUser } from '../../features/User/UserAction';
 
 const LoginForm = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [email, setEmail] = React.useState("")
   const [password, setPassword] = React.useState("")
@@ -14,11 +17,16 @@ const LoginForm = () => {
   const [formError, setFormError] = React.useState({})
   const formErr = {}
 
-  React.useEffect(()=>{
-    if(localStorage.getItem("token")){
+  React.useEffect(() => {
+    if (localStorage.getItem("token")) {
       navigate("/")
     }
-  },[])
+  }, [])
+
+  const User = useSelector((state)=>{
+    return state.User
+  })
+  
 
   const verifyEmail = (value) => {
     var emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -43,6 +51,7 @@ const LoginForm = () => {
   const resolve = () => {
     setEmail("")
     setPassword("")
+    navigate("/")
   }
 
   const handleFormSubmit = (e) => {
@@ -54,23 +63,19 @@ const LoginForm = () => {
       const data = {
         email, password
       }
-      axios.post("http://localhost:3400/api/user/login",data)
-       .then((response)=>{
-        const data = response.data
-        localStorage.setItem("token",JSON.stringify(data))
-        navigate("/")
-       })
-       .catch((err)=>{
-        console.log(err)
-       })
-      // console.log(data)
-      resolve()
+      const res = {
+        data,resolve
+      }
+      dispatch(loginUser(res))
     }
   }
 
 
   return (
     <div>
+      {
+        User.laoding && <p>loading...</p>
+      }
       <Card color="transparent" shadow={false} className="text-[#fdfcfa]">
         <h4>
           Sign in

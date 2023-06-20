@@ -26,6 +26,16 @@ const UserSlice = createSlice({
             state.laoding = false
             state.error=action.payload
         })
+        .addCase(loginUser.pending,(state)=>{
+            state.laoding = true
+        })
+        .addCase(loginUser.fulfilled,(state,action)=>{
+            state.login = action.payload
+            state.laoding = false
+        })
+        .addCase(loginUser.rejected,(state,action)=>{
+            state.error = action.payload
+        })
     }
 })
 

@@ -23,8 +23,12 @@ export const registerUser = createAsyncThunk("user/register",async(req)=>{
     }
 })
 
-export const loginUser = createAsyncThunk("user/login",async(data)=>{
-    const response = await axios.post(`${BaseURL}/user/login`,data)
+export const loginUser = createAsyncThunk("user/login",async(res)=>{
+    const response = await axios.post(`${BaseURL}/user/login`,res.data)
+    if(response.data.hasOwnProperty("token")){
+        res.resolve()
+        localStorage.setItem("token",JSON.stringify(response.data.token))
+    }
     return response.data
 })
 
