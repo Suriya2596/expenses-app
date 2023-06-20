@@ -33,11 +33,19 @@ export const loginUser = createAsyncThunk("user/login",async(res)=>{
 })
 
 export const accountUser = createAsyncThunk("user/account", async ()=>{
-    const response = await axios.get(`${BaseURL}/user`,{headers:header})
-    return response.data
+    try {
+        const response = await axios.get(`${BaseURL}/user`,{headers:header})
+        return response.data
+    } catch (error) {
+        throw new Error (error.response.data.message)
+    }
 })
 
 export const updateUser = createAsyncThunk("user/update", async (data)=>{
-    const response = await axios.put(`${BaseURL}/user`,{headers:header},data)
-    return response.data
+    try{
+        const response = await axios.get(`${BaseURL}/user`,{headers:header})
+        return response.data
+    }catch(error){
+        throw new Error(error.response.data.message)
+    }
 })
