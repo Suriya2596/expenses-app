@@ -31,3 +31,12 @@ export const updateBudget = createAsyncThunk("update/budget",async(data,id)=>{
         window.alert(error.response.data.message)
     }
 })
+
+export const destroyBudget = createAsyncThunk("delete/budget",async(id)=>{
+    try{
+        const response = await axios.delete(`${BaseURL}/budget/${id}`,{headers:tokenHeader})
+        return response.data
+    }catch(error){
+        window.alert(error.response.data.message)
+    }
+})

@@ -1,7 +1,7 @@
-const StatusCode = {
+const statusCode = {
     IDEL:"idel",
     ERROR:"error",
     LOADING:"loading"
 }
 
-export default StatusCode
+export default statusCode
