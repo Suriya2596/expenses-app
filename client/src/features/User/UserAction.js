@@ -3,10 +3,6 @@ import axios from "axios";
 import BaseURL from "../BaseURL";
 
 
-const token = localStorage.getItem("token") && JSON.parse(localStorage.getItem("token"))
-
-const header = {"Authorization":token}
-
 export const registerUser = createAsyncThunk("user/register",async(req)=>{
     const response = await axios.post(`${BaseURL}/user/register`,req.data)
     if(response.data.hasOwnProperty("errors")){
@@ -34,7 +30,10 @@ export const loginUser = createAsyncThunk("user/login",async(res)=>{
 
 export const accountUser = createAsyncThunk("user/account", async ()=>{
     try {
-        const response = await axios.get(`${BaseURL}/user`,{headers:header})
+        const response = await axios.get(`${BaseURL}/user/account`,{headers:{"Authorization":JSON.parse(localStorage.getItem("token"))}})
+        if(Object.keys(response.data).length>0&& response.data.errors=="Invalid Token"){
+            localStorage.removeItem("token")
+        }
         return response.data
     } catch (error) {
         throw new Error (error.response.data.message)
@@ -43,7 +42,7 @@ export const accountUser = createAsyncThunk("user/account", async ()=>{
 
 export const updateUser = createAsyncThunk("user/update", async (data)=>{
     try{
-        const response = await axios.put(`${BaseURL}/user`,{headers:header},data)
+        const response = await axios.put(`${BaseURL}/user/update`,{headers:{"Authorization":JSON.parse(localStorage.getItem("token"))}},data)
         return response.data
     }catch(error){
         throw new Error(error.response.data.message)

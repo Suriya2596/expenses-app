@@ -15,9 +15,10 @@ import {
   PowerIcon,
 } from "@heroicons/react/24/solid";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
+  const navigate = useNavigate()
   const linksNav = [
     {
       icon: () => <PresentationChartBarIcon className="h-5 w-5" />,
@@ -37,9 +38,14 @@ export default function NavBar() {
     {
       icon: () => <PowerIcon className="h-5 w-5" />,
       path: "/logout",
-      name: " Log Out",
+      name: "Log Out",
     },
   ];
+
+  const handleLogout = ()=>{
+    localStorage.getItem("token") && localStorage.removeItem("token")
+    navigate("/login")
+  }
 
   return (
     <>
@@ -60,7 +66,7 @@ export default function NavBar() {
             return (
               <ListItem key={el}>
                 <ListItemPrefix>{eleLink.icon()}</ListItemPrefix>
-                <Link to={eleLink.path}>{eleLink.name}</Link>
+                {eleLink.path=="/logout"?<span onClick={handleLogout}>{eleLink.name}</span>:<Link to={eleLink.path}>{eleLink.name}</Link>}
               </ListItem>
             );
           })}

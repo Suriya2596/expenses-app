@@ -3,7 +3,6 @@ import {
   Card,
   CardBody,
   CardFooter,
-  Typography,
   Button,
   Input,
 } from "@material-tailwind/react";
@@ -24,10 +23,10 @@ export default function BudgetMain() {
           Budget
         </h5>
         <h4 className="primary-cl">0</h4>
-        {editBudget&& <form><Input color="white" label="Edit Budget" /></form> }
+        {editBudget && <form><Input color="white" label="Edit Budget" /></form> }
       </CardBody>
       <CardFooter className="pt-0">
-        <Button color="amber" onClick={handleEditBudget}>{editBudget?"Save the Budget":"Edit the Budget"}</Button>
+        {editBudget && <Button color="amber" onClick={handleEditBudget}>Edit the Budget</Button>}
       </CardFooter>
     </Card>
   );

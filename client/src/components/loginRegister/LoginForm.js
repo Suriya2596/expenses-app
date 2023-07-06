@@ -24,7 +24,7 @@ const LoginForm = () => {
   }, [])
 
   const User = useSelector((state)=>{
-    return state.User
+    return state.user
   })
   
 
