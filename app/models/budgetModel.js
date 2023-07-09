@@ -4,11 +4,13 @@ const Schema = mongoose.Schema
 const budgetSchema = new Schema({
     total:{
         type:String,
-        required:true
+        required:true,
+        default:0,
     },
     user:{
         type:Schema.Types.ObjectId,
-        ref:"User"
+        ref:"User",
+        unique:true,
     }
 },{timestamps:true})
 

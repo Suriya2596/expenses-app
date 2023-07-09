@@ -51,7 +51,17 @@ const UserSlice = createSlice({
             state.error = null
         })
         // update
-
+        .addCase(updateUser.pending,(state)=>{
+            state.laoding = true
+        })
+        .addCase(updateUser.rejected,(state,action)=>{
+            state.error = action.payload
+        })
+        .addCase(updateUser.fulfilled,(state,action)=>{
+            state.user = action.payload
+            state.laoding = false
+            state.error = null
+        })
     }
 })
 

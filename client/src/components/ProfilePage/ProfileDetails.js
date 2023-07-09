@@ -57,7 +57,7 @@ const ProfileDetails = () => {
                     !mobileToggle && (
                         <>
                             <p>{user.user && user.user.mobile}</p>
-                            <p className='ml-6'>Edit</p>
+                            <p className='ml-6' onClick={handleMobileToggle}>Edit</p>
                         </>
                     )
                 }
