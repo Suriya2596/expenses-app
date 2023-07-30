@@ -15,7 +15,7 @@ budgetController.create = (req,res)=>{
 }
 
 budgetController.list = (req,res)=>{
-    Budget.find({user:req.user._id})
+    Budget.findOne({user:req.user._id})
         .then((data)=>{
             res.json(data)
         })

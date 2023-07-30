@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { budgetCreate } from "./BudgetAction";
+import { budgetCreate, budgetList } from "./BudgetAction";
 
 const budgetSlice = createSlice({
     name:"budget",
@@ -21,6 +21,19 @@ const budgetSlice = createSlice({
             state.budgetData = action.payload
         })
         .addCase(budgetCreate.rejected,(state,action)=>{
+            state.loading = false
+            state.error = action.payload
+        })
+        // budgetList
+        .addCase(budgetList.pending,(state)=>{
+            state.loading = true
+        })
+        .addCase(budgetList.fulfilled,(state,action)=>{
+            state.loading = false
+            state.error = null
+            state.budgetData = action.payload
+        })
+        .addCase(budgetList.rejected,(state,action)=>{
             state.loading = false
             state.error = action.payload
         })

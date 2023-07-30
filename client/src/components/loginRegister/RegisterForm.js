@@ -9,8 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux"
 import React from "react";
 import { registerUser } from "../../features/User/UserAction";
-import { budgetCreate } from "../../features/Budget/BudgetAction";
-
 
 export default function RegisterForm() {
   const dispatch = useDispatch()
@@ -62,7 +60,6 @@ export default function RegisterForm() {
 
   }
   const resolve = () => {
-    dispatch(budgetCreate())
     setName("")
     setEmail("")
     setMobile("")
