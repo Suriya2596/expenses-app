@@ -8,10 +8,10 @@ import {
 } from "@material-tailwind/react";
 import { RocketLaunchIcon } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
+import BudgetForm from "./BudgetForm";
 
 
 export default function EditBudget() {
-    const dispatch = useDispatch()
     const [editBudget, setEditBudget] = React.useState(false)
 
     const handleEditBudget = () => {
@@ -31,10 +31,13 @@ export default function EditBudget() {
                     Budget
                 </h5>
                 {!editBudget && budget && budget.budgetData && <h4 className="primary-cl">{budget.budgetData.total}</h4>}
+                {
+                    editBudget && <BudgetForm handleEditBudget={handleEditBudget}/>
+                }
             </CardBody>
             <CardFooter className="pt-0">
                 <>
-                    <Button color="amber" onClick={handleEditBudget}>Edit Budget</Button>
+                    {!editBudget && <Button color="amber" onClick={handleEditBudget}>Edit Budget</Button>}
                 </>
             </CardFooter>
         </Card>

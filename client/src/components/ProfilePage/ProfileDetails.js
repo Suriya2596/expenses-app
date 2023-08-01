@@ -24,7 +24,7 @@ const ProfileDetails = () => {
         setMobileToggle(!mobileToggle)
     }
 
-    console.log(user)
+    // console.log(user)
 
     return (
         <div className='grid grid-cols-1 gap-4 w-[1000px]'>

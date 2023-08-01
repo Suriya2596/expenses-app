@@ -18,7 +18,7 @@ routes.get("/api/user/account",authentication,userContoller.account)
 routes.put("/api/user/update",authentication,userContoller.update)
 
 // budget routes
-routes.post("/api/budget",authentication,budgetController.create)
+routes.post("/api/budget",budgetController.create)
 routes.get("/api/budget",authentication,budgetController.list)
 routes.get("/api/budget/:id",authentication,budgetController.show)
 routes.put("/api/budget/:id",authentication,budgetController.update)

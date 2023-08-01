@@ -8,9 +8,21 @@ import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import Profile from "./pages/Profile";
+import { useDispatch } from "react-redux";
+import { accountUser } from "./features/User/UserAction";
+import { budgetList } from "./features/Budget/BudgetAction";
 
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  React.useEffect(()=>{
+    if(localStorage.getItem("token")){
+      dispatch(accountUser())
+      dispatch(budgetList())
+    }
+  },[dispatch])
   
   const router = createBrowserRouter(createRoutesFromElements(
     <Route >

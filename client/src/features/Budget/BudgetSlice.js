@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { budgetCreate, budgetList } from "./BudgetAction";
+import { budgetCreate, budgetList, budgetLogout } from "./BudgetAction";
 
 const budgetSlice = createSlice({
     name:"budget",
@@ -37,6 +37,11 @@ const budgetSlice = createSlice({
             state.loading = false
             state.error = action.payload
         })
+        .addCase(budgetLogout, (state) => {
+            state.loading = false
+            state.error = null
+            state.budgetData = {};
+        });  
     }
 })
 

@@ -4,7 +4,7 @@ const budgetController = {}
 budgetController.create = (req,res)=>{
     const body = req.body
     const newBuget = new Budget(body)
-    newBuget.user = req.user._id
+    newBuget.user = body.user
     newBuget.save()
         .then((data)=>{
             res.json(data)
