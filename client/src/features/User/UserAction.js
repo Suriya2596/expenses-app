@@ -6,7 +6,7 @@ import BaseURL from "../BaseURL";
 export const registerUser = createAsyncThunk("user/register", async (req) => {
     try {
         const response = await axios.post(`${BaseURL}/user/register`, req.data)
-        console.log(response.data)
+        // console.log(response.data)
         if (response.data.hasOwnProperty("errors")) {
             alert(JSON.stringify(response.data.message))
         }

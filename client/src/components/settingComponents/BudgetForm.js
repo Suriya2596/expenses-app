@@ -1,64 +1,68 @@
-import React from 'react'
-import {
-    Card,
-    Input,
-    Checkbox,
-    Button,
-    Typography,
-} from "@material-tailwind/react";
+import React from "react";
+import { Input, Button } from "@material-tailwind/react";
 
 import { useDispatch, useSelector } from "react-redux";
+import { budgetUpdate } from "../../features/Budget/BudgetAction";
 
-const BudgetForm = ({handleEditBudget}) => {
-    const budget = useSelector((state) => {
+function BudgetForm({handleEditBudget}) {
+
+    const dispatch = useDispatch()
+    
+    const [total,setTotal] = React.useState("")
+    const [formError,setFormError] = React.useState({})
+    let formErr = {}
+
+    const {budgetData} = useSelector((state)=>{
         return state.budget
     })
-    const [totalBudget, setTotalBudget] = React.useState("")
-    const [formError, setFormError] = React.useState({})
 
-    React.useEffect(() => {
-        if (budget && Object.keys(budget.budgetData).length > 0) {
-            setTotalBudget((budget.budgetData.total))
+    React.useEffect(()=>{
+        if(budgetData){
+            setTotal(budgetData.total)
         }
-    }, [budget])
+    },[budgetData])
 
-    const handleFormError = () => {
-        if (totalBudget.length == 0) {
-            setFormError({ total: "error" })
+    const handleFormError = ()=>{
+        if(total.length===0){
+            formErr.total = "Required"
         }
     }
 
-    const handleFormSubmit = (e) => {
+    const resolve = ()=>{
+        setTotal("")
+        setFormError({})
+        handleEditBudget()
+    }
+
+    const handleFormSubmit = (e)=>{
         e.preventDefault()
         handleFormError()
-        if (!Object.keys(formError).length > 0) {
+        if(Object.keys(formErr).length>0){
+            setFormError(formErr)
+        }else{
             const data = {
-                total: totalBudget
+                total
             }
-            handleEditBudget()
-            console.log(data)
+            const req = {
+                data,resolve
+            }
+            dispatch(budgetUpdate(req))
         }
     }
+
     return (
-        <>
-            <form className="my-2" onSubmit={handleFormSubmit}>
-                <div className="mb-4 flex flex-col gap-6">
-                    <Input size="lg" label="Budget" color='white'
-                        value={totalBudget}
-                        type='number'
-                        onChange={(e) => {
-                            setTotalBudget(e.target.value)
-                            delete formError.total
-                        }}
-                    />
-                    {
-                        Object.keys(formError).length > 0 && formError.total && <p className='text-red-600'>{formError.total}</p>
-                    }
-                </div>
-                <Button color="amber" onClick={handleEditBudget} type='submit'>Update Budget</Button>
-            </form>
-        </>
-    )
+        <form onSubmit={handleFormSubmit} action="/submit" method="POST">
+            <div className="w-72">
+                <Input label="Budget" color="white" className="py-2" type="number" name="total" value={total} onChange={(e)=>{
+                    setTotal(e.target.value)
+                }} />
+                {
+                    Object.keys(formError).length>0 && formError.total && <p className="text-red-600">{formError.total}</p>
+                }
+                <Button type="submit" color="amber" className="my-4">Update Budget</Button>
+            </div>
+        </form>
+    );
 }
 
 export default BudgetForm

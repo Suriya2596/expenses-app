@@ -8,7 +8,7 @@ export const budgetCreate = createAsyncThunk("budget/create", async (data) => {
         const response = await axios.post(`${BaseURL}/budget`, data,
             { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } }
         )
-        console.log(response)
+        // console.log(response)
         if (response.data.hasOwnProperty("keyValue")) {
             alert(`User is already created budget`)
         }
@@ -34,6 +34,30 @@ export const budgetList = createAsyncThunk("budget/list", async () => {
         // console.log(response)
         if (response.data.hasOwnProperty("errors")) {
             alert(response.data.message)
+        }
+        if (response.data.hasOwnProperty("_id")) {
+            return response.data
+        }
+        if (response.data && response.data.errors === "Invalid Token") {
+            localStorage.removeItem("token")
+        }
+    } catch (error) {
+        // console.log(error)
+        throw new Error(error.response.data.message)
+    }
+})
+
+export const budgetUpdate = createAsyncThunk("budget/update", async (req) => {
+    try {
+        const response = await axios.put(`${BaseURL}/budget`,req.data,
+            { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } }
+        )
+        // console.log(response)
+        if (response.data.hasOwnProperty("errors")) {
+            alert(response.data.message)
+        }
+        if (response.data.hasOwnProperty("_id")) {
+            req.resolve()
         }
         if (response.data.hasOwnProperty("_id")) {
             return response.data

@@ -25,8 +25,7 @@ budgetController.list = (req,res)=>{
 }
 
 budgetController.show = (req,res)=>{
-    const id = req.params.id
-    Budget.findOne({_id:id,user:req.user._id})
+    Budget.findOne({user:req.user._id})
         .then((data)=>{
             res.json(data)
         })
@@ -36,9 +35,8 @@ budgetController.show = (req,res)=>{
 }
 
 budgetController.update = (req,res)=>{
-    const id = req.params.id
     const body = req.body
-    Budget.findOneAndUpdate({_id:id,user:req.user._id},body,{new:true,runValidators:true})
+    Budget.findOneAndUpdate({user:req.user._id},body,{new:true,runValidators:true})
         .then((data)=>{
             res.json(data)
         })
@@ -48,8 +46,7 @@ budgetController.update = (req,res)=>{
 }
 
 budgetController.destory = (req,res)=>{
-    const id = req.params.id
-    Budget.findOneAndDelete({_id:id,user:req.user._id})
+    Budget.findOneAndDelete({user:req.user._id})
         .then((data)=>{
             res.json(data)
         })

@@ -20,9 +20,9 @@ routes.put("/api/user/update",authentication,userContoller.update)
 // budget routes
 routes.post("/api/budget",budgetController.create)
 routes.get("/api/budget",authentication,budgetController.list)
-routes.get("/api/budget/:id",authentication,budgetController.show)
-routes.put("/api/budget/:id",authentication,budgetController.update)
-routes.delete("/api/budget/:id",authentication,authorization,budgetController.destory)
+routes.get("/api/budget/",authentication,budgetController.show)
+routes.put("/api/budget/",authentication,budgetController.update)
+routes.delete("/api/budget/",authentication,authorization,budgetController.destory)
 
 // category routes
 routes.post("/api/category",authentication,categoryController.create)
