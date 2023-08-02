@@ -6,7 +6,7 @@ import {
   Button,
   Input,
 } from "@material-tailwind/react";
-import { RocketLaunchIcon } from "@heroicons/react/24/solid";
+import { MoonIcon } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { budgetList } from "../../features/Budget/BudgetAction";
 import BudgetForm from "./BudgetForm";
@@ -32,7 +32,7 @@ export default function BudgetMain() {
   return (
     <Card className="mt-6 w-auto bg-drak-gray">
       <CardBody>
-        <RocketLaunchIcon className="primary-cl w-12 h-12 mb-4" />
+        <MoonIcon className="primary-cl w-12 h-12 mb-4" />
         <h5 className="mb-2 white-cl">
           Budget
         </h5>

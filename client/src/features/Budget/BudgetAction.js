@@ -9,14 +9,14 @@ export const budgetCreate = createAsyncThunk("budget/create", async (data) => {
             { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } }
         )
         // console.log(response)
-        if (response.data.hasOwnProperty("keyValue")) {
-            alert(`User is already created budget`)
+        if (response.data.hasOwnProperty("_id")) {
+            return response.data
         }
         if (response.data.hasOwnProperty("errors")) {
             alert(response.data.message)
         }
-        if (response.data.hasOwnProperty("_id")) {
-            return response.data
+        if (response.data.hasOwnProperty("keyValue")) {
+            alert(`User is already created budget`)
         }
         if (response.data && response.data.errors === "Invalid Token") {
             localStorage.removeItem("token")
