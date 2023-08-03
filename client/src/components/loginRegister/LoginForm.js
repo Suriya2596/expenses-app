@@ -95,7 +95,7 @@ const LoginForm = () => {
               }
             </div>
             <div>
-              <Input type="password" size="lg" label="Password" color="white" value={password} onChange={(e) => {
+              <Input type="password" size="lg" autoComplete='off' label="Password" color="white" value={password} onChange={(e) => {
                 setPassword(e.target.value)
                 delete formError.password
               }} />

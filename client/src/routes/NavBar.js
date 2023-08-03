@@ -9,6 +9,7 @@ import {
   List,
   ListItem,
   ListItemPrefix,
+  Collapse,
 } from "@material-tailwind/react";
 
 import {
@@ -130,14 +131,11 @@ export default function NavBar() {
           )}
         </IconButton>
       </div>
-      <MobileNav open={openNav}>
+      <Collapse open={openNav}>
         <div className="container mx-auto">
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2">
-            <span>Buy Now</span>
-          </Button>
         </div>
-      </MobileNav>
+      </Collapse>
     </Navbar>
   );
 }

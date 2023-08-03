@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { categoryCreate } from "./CategoryAction";
+import { categoryCreate, categoryList, categoryUpdate } from "./CategoryAction";
 
 const CategorySlice = createSlice({
     name:"category",
@@ -11,6 +11,7 @@ const CategorySlice = createSlice({
     reducers:{},
     extraReducers:(builder)=>{
         builder
+        // create
         .addCase(categoryCreate.pending,(state)=>{
             state.loading = true
         })
@@ -22,6 +23,38 @@ const CategorySlice = createSlice({
             state.loading = false
             state.error = null
             state.categoryData = [...state.categoryData,action.payload]
+        })
+        // listing
+        .addCase(categoryList.pending,(state)=>{
+            state.loading = true
+        })
+        .addCase(categoryList.rejected,(state,action)=>{
+            state.loading = false
+            state.error = action.payload
+        })
+        .addCase(categoryList.fulfilled,(state,action)=>{
+            state.loading = false
+            state.error = null
+            state.categoryData = action.payload
+        })
+        // update
+        .addCase(categoryUpdate.pending,(state)=>{
+            state.loading = true
+        })
+        .addCase(categoryUpdate.rejected,(state,action)=>{
+            state.loading = false
+            state.error = action.payload
+        })
+        .addCase(categoryUpdate.fulfilled,(state,action)=>{
+            state.loading = false
+            state.error = null
+            state.categoryData = state.categoryData.map((category)=>{
+                if(category._id==action.payload._id){
+                    return { ...category, ...action.payload }
+                }else{
+                    return {...category}
+                }
+            })
         })
     }
 })

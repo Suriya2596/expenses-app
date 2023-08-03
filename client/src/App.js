@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import { useDispatch } from "react-redux";
 import { accountUser } from "./features/User/UserAction";
 import { budgetList } from "./features/Budget/BudgetAction";
+import { categoryList } from "./features/category/CategoryAction";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     if(localStorage.getItem("token")){
       dispatch(accountUser())
       dispatch(budgetList())
+      dispatch(categoryList())
     }
   },[dispatch])
   
