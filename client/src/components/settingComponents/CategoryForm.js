@@ -33,12 +33,19 @@ export default function CategoryForm({handleCategory,_id,title,handleEditCat,edi
     } else {
       const data = {
         title: categoryName,
-        _id:_id
       }
-      const req = {
-        data, resolve
+      if(editCat){
+        const req = {
+          data, resolve,_id
+        }
+        handleCategory(req)
+      }else{
+        const req = {
+          data, resolve
+        }
+        handleCategory(req)
       }
-      handleCategory(req)
+      
     }
   }
   return (

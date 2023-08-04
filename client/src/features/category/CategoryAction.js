@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export const categoryCreate = createAsyncThunk("category/create", async (req) => {
     try {
-        const response = await axios.post(`http://localhost:3400/api/category`, {title:req.data.title}, {
+        const response = await axios.post(`http://localhost:3400/api/category`, req.data, {
             headers: {
                 "Authorization": JSON.parse(localStorage.getItem("token"))
             }
@@ -63,7 +63,7 @@ export const categoryList = createAsyncThunk("category/list", async () => {
 
 export const categoryUpdate = createAsyncThunk("category/update", async (req) => {
     try {
-        const response = await axios.put(`http://localhost:3400/api/category/${req.data._id}`,{title:req.data.title}, {
+        const response = await axios.put(`http://localhost:3400/api/category/${req._id}`,req.data, {
             headers: {
                 "Authorization": JSON.parse(localStorage.getItem("token"))
             }
