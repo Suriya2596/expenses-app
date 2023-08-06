@@ -22,7 +22,7 @@ import { categoryList, categoryUpdate } from "../../features/category/CategoryAc
 import CategoryForm from "./CategoryForm";
 
 
-export function CategoryTable() {
+export function ExpenseTable() {
 
     const dispatch = useDispatch()
     const [editCat, setEditCat] = React.useState(false)

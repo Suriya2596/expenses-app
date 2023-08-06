@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { accountUser } from "./features/User/UserAction";
 import { budgetList } from "./features/Budget/BudgetAction";
 import { categoryList } from "./features/category/CategoryAction";
+import { expensesList } from "./features/Expenses/ExpensesAction";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       dispatch(accountUser())
       dispatch(budgetList())
       dispatch(categoryList())
+      dispatch(expensesList())
     }
   },[dispatch])
   
