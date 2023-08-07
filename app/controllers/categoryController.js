@@ -25,6 +25,26 @@ categoryController.list = (req,res)=>{
         })
 }
 
+categoryController.listUndelete = (req,res)=>{
+    Category.find({user:req.user._id,isDelete:false})
+        .then((data)=>{
+            res.json(data)
+        })
+        .catch((err)=>{
+            res.json(err)
+        })
+}
+
+categoryController.listDelete = (req,res)=>{
+    Category.find({user:req.user._id,isDelete:true})
+        .then((data)=>{
+            res.json(data)
+        })
+        .catch((err)=>{
+            res.json(err)
+        })
+}
+
 categoryController.show = (req,res)=>{
     const id = req.params.id
     Category.findOne({_id:id,user:req.user._id})

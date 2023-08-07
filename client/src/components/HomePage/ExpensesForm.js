@@ -7,6 +7,7 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryList } from "../../features/category/CategoryAction";
+import { expensesCreate } from "../../features/Expenses/ExpensesAction";
 
 export function ExpensesForm({ handleOpen }) {
     const dispatch = useDispatch()
@@ -56,8 +57,10 @@ export function ExpensesForm({ handleOpen }) {
             const data = {
                 title, amount, expenseDate, category
             }
-            resolve()
-            console.log(data)
+            const req = {
+                data,resolve
+            }
+            dispatch(expensesCreate(req))
         }
     }
 

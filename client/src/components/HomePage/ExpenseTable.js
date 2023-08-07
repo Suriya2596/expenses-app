@@ -19,58 +19,41 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryList, categoryUpdate } from "../../features/category/CategoryAction";
-import CategoryForm from "./CategoryForm";
+import { expensesList } from "../../features/Expenses/ExpensesAction";
 
 
 export function ExpenseTable() {
 
     const dispatch = useDispatch()
-    const [editCat, setEditCat] = React.useState(false)
-    const [cateid, setcateid] = React.useState("")
-    const [showDeletedCat, setShowDeletedCat] = React.useState("")
+    const [editExpense, setEditExpense] = React.useState(false)
+    const [showDeletedExp, setShowDeletedExp] = React.useState(false)
 
     React.useEffect(() => {
+        dispatch(expensesList())
         dispatch(categoryList())
     }, [dispatch])
+
+    const expenses = useSelector((state) => {
+        return state.expenses
+    })
 
     const category = useSelector((state) => {
         return state.category
     })
 
-    const handleEditCat = () => {
-        setEditCat(!editCat)
+    const handleShowDeletedExp = () => {
+        setShowDeletedExp(!showDeletedExp)
     }
 
-    const handleCategory = (req) => {
-        dispatch(categoryUpdate(req))
-    }
-
-    const handleCategoryDelete = (_id, bool) => {
-        const data = {
-            isDelete: bool
-        }
-        const resolve = () => {
-
-        }
-        const req = {
-            data, resolve, _id
-        }
-        dispatch(categoryUpdate(req))
-    }
-
-    const handleShowDeletedCat = () => {
-        setShowDeletedCat(!showDeletedCat)
-    }
-
-    const TABLE_HEAD = ["Category name", "Date", "Edit", "Action",];
+    const TABLE_HEAD = ["Expense name", "Category name", "Date", "Edit" , "Action"];
 
     return (
-        <Card className="h-full w-full">
+        <Card className="h-full w-full my-6">
             <CardHeader floated={false} shadow={false} className="rounded-none">
                 <div className="mb-8 flex items-center justify-between gap-8">
                     <div>
                         <Typography variant="h5" color="blue-gray">
-                            Category
+                            Expenses
                         </Typography>
                     </div>
                 </div>
@@ -79,8 +62,8 @@ export function ExpenseTable() {
                         <Input label="Search" icon={<MagnifyingGlassIcon className="h-5 w-5" />} />
                     </div>
                     <div>
-                        <Button variant="gradient" color="blue-gray" size="sm" onClick={handleShowDeletedCat}>
-                            {showDeletedCat ? "Show Undeleted Category" : "Show Deleted Category"}
+                        <Button variant="gradient" color="blue-gray" size="sm" onClick={handleShowDeletedExp}>
+                            {showDeletedExp ? "Show Undeleted Expenses" : "Show Deleted Expenses"}
                         </Button>
                     </div>
                 </div>
@@ -103,100 +86,54 @@ export function ExpenseTable() {
                         </tr>
                     </thead>
                     {
-                        showDeletedCat ? (
+                        !showDeletedExp && (
                             <tbody>
-                                {category && category.categoryData.length > 0 && [...category.categoryData].reverse().map((cate, index) => {
+                                {expenses && expenses.expensesdata.length > 0 && [...expenses.expensesdata].reverse().map((expens, index) => {
                                     return (
-                                        cate.isDelete && (
+                                        !expens.isDelete && (
                                             <tr key={index}>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
                                                     <div className="flex items-center gap-1">
                                                         <div className="flex flex-col">
-                                                            {
-                                                                (editCat && cateid == cate._id) ? <CategoryForm handleCategory={handleCategory} _id={cate._id} title={cate.title} handleEditCat={handleEditCat} editCat={editCat} setcateid={setcateid} /> :
-                                                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                                                        {cate.title}
-                                                                    </Typography>
-                                                            }
+                                                            <Typography variant="small" color="blue-gray" className="font-normal">
+                                                                {expens.title}
+                                                            </Typography>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
                                                     <div className="flex flex-col">
                                                         <Typography variant="small" color="blue-gray" className="font-normal">
-                                                            {cate.createdAt}
-                                                        </Typography>
-                                                    </div>
-                                                </td>
-                                                <td className={"p-4 border-b border-blue-gray-50"}>
-                                                    <Tooltip content="Edit User">
-                                                        <IconButton variant="text" color="blue-gray">
-                                                            <PencilIcon className="h-4 w-4" onClick={() => {
-                                                                handleEditCat()
-                                                                setcateid(cate._id)
-                                                            }} />
-                                                        </IconButton>
-                                                    </Tooltip>
-                                                </td>
-                                                <td className={"p-4 border-b border-blue-gray-50"}>
-                                                    <p className="hover:text-blue-800 cursor-pointer" onClick={() => {
-                                                        handleCategoryDelete(cate._id, false)
-                                                    }}>Un-Delete</p>
-                                                </td>
-                                            </tr>
-                                        )
-
-                                    );
-                                })}
-                            </tbody>
-                        ) : (
-                            <tbody>
-                                {category && category.categoryData.length > 0 && [...category.categoryData].reverse().map((cate, index) => {
-                                    return (
-                                        !cate.isDelete && (
-                                            <tr key={index}>
-                                                <td className={"p-4 border-b border-blue-gray-50"}>
-                                                    <div className="flex items-center gap-3">
-                                                        <div className="flex flex-col">
                                                             {
-                                                                (editCat && cateid == cate._id) ? <CategoryForm handleCategory={handleCategory} _id={cate._id} title={cate.title} handleEditCat={handleEditCat} editCat={editCat} setcateid={setcateid} /> :
-                                                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                                                        {cate.title}
-                                                                    </Typography>
+                                                                category.categoryData.map((ele, e) => {
+                                                                    if (expens.category == ele._id) {
+                                                                        return  <p key={e}>{ele.title}</p>
+                                                                    }
+                                                                })
                                                             }
-                                                        </div>
+                                                        </Typography>
                                                     </div>
                                                 </td>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
                                                     <div className="flex flex-col">
                                                         <Typography variant="small" color="blue-gray" className="font-normal">
-                                                            {cate.createdAt}
+                                                            {expens.createdAt}
                                                         </Typography>
                                                     </div>
                                                 </td>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
                                                     <Tooltip content="Edit User">
                                                         <IconButton variant="text" color="blue-gray">
-                                                            <PencilIcon className="h-4 w-4" onClick={() => {
-                                                                handleEditCat()
-                                                                setcateid(cate._id)
-                                                            }} />
+                                                            <PencilIcon className="h-4 w-4" />
                                                         </IconButton>
                                                     </Tooltip>
                                                 </td>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
-                                                    <Tooltip content="Edit User">
-                                                        <IconButton variant="text" color="blue-gray">
-                                                            <ArchiveBoxArrowDownIcon className="h-4 w-4" onClick={() => {
-                                                                handleCategoryDelete(cate._id, true)
-                                                            }} />
-                                                        </IconButton>
-                                                    </Tooltip>
+                                                    <p className="hover:text-blue-800 cursor-pointer">Delete</p>
                                                 </td>
                                             </tr>
                                         )
-
-                                    );
+                                    )
                                 })}
                             </tbody>
                         )

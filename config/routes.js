@@ -27,6 +27,8 @@ routes.delete("/api/budget/",authentication,authorization,budgetController.desto
 // category routes
 routes.post("/api/category",authentication,categoryController.create)
 routes.get("/api/category",authentication,categoryController.list)
+routes.get("/api/category/deleted",authentication,categoryController.listDelete)
+routes.get("/api/category/undeleted",authentication,categoryController.listUndelete)
 routes.get("/api/category/:id",authentication,categoryController.show)
 routes.put("/api/category/:id",authentication,categoryController.update)
 routes.delete("/api/category/:id",authentication,authorization,categoryController.destroy)
@@ -34,6 +36,8 @@ routes.delete("/api/category/:id",authentication,authorization,categoryControlle
 // expenses routes
 routes.post("/api/expenses",authentication,expensesController.create)
 routes.get("/api/expenses",authentication,expensesController.list)
+routes.get("/api/expenses/deleted",authentication,expensesController.listDelete)
+routes.get("/api/expenses/undeleted",authentication,expensesController.listUndelete)
 routes.get("/api/expenses/:id",authentication,expensesController.show)
 routes.put("/api/expenses/:id",authentication,expensesController.update)
 routes.delete("/api/expenses/:id",authentication,authorization,expensesController.destroy)

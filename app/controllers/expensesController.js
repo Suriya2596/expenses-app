@@ -24,6 +24,26 @@ expensesController.list = (req,res)=>{
         })
 }
 
+expensesController.listUndelete = (req,res)=>{
+    Expenses.find({user:req.user._id,isDeleted:false})
+        .then((responseData)=>{
+            res.json(responseData)
+        })
+        .catch((err)=>{
+            res.json(err)
+        })
+}
+
+expensesController.listDelete = (req,res)=>{
+    Expenses.find({user:req.user._id,isDeleted:true})
+        .then((responseData)=>{
+            res.json(responseData)
+        })
+        .catch((err)=>{
+            res.json(err)
+        })
+}
+
 expensesController.show = (req,res)=>{
     const id = req.params.id
     Expenses.findOne({_id:id,user:req.user._id})
