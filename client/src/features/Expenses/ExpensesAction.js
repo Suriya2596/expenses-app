@@ -23,7 +23,7 @@ export const expensesCreate = createAsyncThunk("expenses/create",async(req)=>{
         if (response.data.hasOwnProperty("keyValue")) {
             alert(`already created budget`)
         }
-        if (!data && data.errors === "Invalid Token") {
+        if (response.data.errors == "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     }catch(err){
@@ -50,7 +50,7 @@ export const expensesList = createAsyncThunk("expenses/list",async()=>{
         if (response.data.hasOwnProperty("keyValue")) {
             alert(`already created`)
         }
-        if (!data && data.errors === "Invalid Token") {
+        if (response.data.errors == "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     }catch(err){

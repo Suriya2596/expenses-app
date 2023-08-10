@@ -38,6 +38,9 @@ export const loginUser = createAsyncThunk("user/login", async (res) => {
         if (response.data.hasOwnProperty("token")) {
             return response.data
         }
+        if (response.data.errors == "Invalid Token" || !response.data ) {
+            localStorage.removeItem("token")
+        }
     } catch (error) {
         throw new Error(error.response.data.message)
     }
@@ -46,12 +49,15 @@ export const loginUser = createAsyncThunk("user/login", async (res) => {
 export const accountUser = createAsyncThunk("user/account", async () => {
     try {
         const response = await axios.get(`http://localhost:3400/api/user/account`, { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } })
-        // console.log(response.data)
+        console.log(response.data)
         if (Object.keys(response.data).length > 0 && response.data.errors === "Invalid Token" && response.data == null) {
             localStorage.removeItem("token")
         }
         if (response.data.hasOwnProperty("_id")) {
             return response.data
+        }
+        if (response.data.errors == "Invalid Token" || !response.data ) {
+            localStorage.removeItem("token")
         }
     } catch (error) {
         throw new Error(error.response.data.message)
@@ -73,7 +79,7 @@ export const updateUser = createAsyncThunk("user/update", async (resData) => {
         if (response.data.hasOwnProperty("errors")) {
             alert(response.data.message)
         }
-        if (!response.data && response.data.errors === "Invalid Token") {
+        if (response.data.errors == "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     } catch (error) {

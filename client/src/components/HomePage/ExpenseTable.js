@@ -45,7 +45,7 @@ export function ExpenseTable() {
         setShowDeletedExp(!showDeletedExp)
     }
 
-    const TABLE_HEAD = ["Expense name", "Category name", "Date", "Edit" , "Action"];
+    const TABLE_HEAD = ["Expense name", "Category name", "Date", "Edit", "Action"];
 
     return (
         <Card className="h-full w-full my-6">
@@ -107,7 +107,60 @@ export function ExpenseTable() {
                                                             {
                                                                 category.categoryData.map((ele, e) => {
                                                                     if (expens.category == ele._id) {
-                                                                        return  <p key={e}>{ele.title}</p>
+                                                                        return ele.isDelete? <p key={e} className="line-through">{ele.title}</p> : <p key={e}>{ele.title}</p>
+                                                                    }
+                                                                })
+                                                            }
+                                                        </Typography>
+                                                    </div>
+                                                </td>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {expens.createdAt}
+                                                        </Typography>
+                                                    </div>
+                                                </td>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <Tooltip content="Edit User">
+                                                        <IconButton variant="text" color="blue-gray">
+                                                            <PencilIcon className="h-4 w-4" />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </td>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <p className="hover:text-blue-800 cursor-pointer">Delete</p>
+                                                </td>
+                                            </tr>
+                                        )
+                                    )
+                                })}
+                            </tbody>
+                        )
+                    }
+                    {
+                        showDeletedExp && (
+                            <tbody>
+                                {expenses && expenses.expensesdata.length > 0 && [...expenses.expensesdata].reverse().map((expens, index) => {
+                                    return (
+                                        expens.isDelete && (
+                                            <tr key={index}>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <div className="flex items-center gap-1">
+                                                        <div className="flex flex-col">
+                                                            <Typography variant="small" color="blue-gray" className="font-normal">
+                                                                {expens.title}
+                                                            </Typography>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {
+                                                                category.categoryData.map((ele, e) => {
+                                                                    if (expens.category == ele._id) {
+                                                                        return ele.isDelete? <p key={e} className="line-through">{ele.title}</p> : <p key={e}>{ele.title}</p>
                                                                     }
                                                                 })
                                                             }

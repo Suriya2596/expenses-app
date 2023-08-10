@@ -18,7 +18,7 @@ export const budgetCreate = createAsyncThunk("budget/create", async (data) => {
         if (response.data.hasOwnProperty("keyValue")) {
             alert(`User is already created budget`)
         }
-        if (!response.data && response.data.errors === "Invalid Token") {
+        if (response.data.errors == "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     } catch (error) {
@@ -38,7 +38,7 @@ export const budgetList = createAsyncThunk("budget/list", async () => {
         if (response.data.hasOwnProperty("_id")) {
             return response.data
         }
-        if (!response.data && response.data.errors === "Invalid Token") {
+        if (response.data.errors == "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     } catch (error) {
@@ -62,7 +62,7 @@ export const budgetUpdate = createAsyncThunk("budget/update", async (req) => {
         if (response.data.hasOwnProperty("_id")) {
             return response.data
         }
-        if (!response.data && response.data.errors === "Invalid Token") {
+        if (response.data.errors == "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     } catch (error) {
