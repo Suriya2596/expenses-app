@@ -1,6 +1,6 @@
 import React from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, ArchiveBoxArrowDownIcon } from "@heroicons/react/24/solid";
+import { PencilIcon } from "@heroicons/react/24/solid";
 import {
     Card,
     CardHeader,
@@ -8,24 +8,18 @@ import {
     Typography,
     Button,
     CardBody,
-    Chip,
     CardFooter,
-    Tabs,
-    TabsHeader,
-    Tab,
-    Avatar,
     IconButton,
     Tooltip,
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
-import { categoryList, categoryUpdate } from "../../features/category/CategoryAction";
+import { categoryList } from "../../features/category/CategoryAction";
 import { expensesList } from "../../features/Expenses/ExpensesAction";
 
 
 export function ExpenseTable() {
 
     const dispatch = useDispatch()
-    const [editExpense, setEditExpense] = React.useState(false)
     const [showDeletedExp, setShowDeletedExp] = React.useState(false)
 
     React.useEffect(() => {
@@ -105,11 +99,12 @@ export function ExpenseTable() {
                                                     <div className="flex flex-col">
                                                         <Typography variant="small" color="blue-gray" className="font-normal">
                                                             {
-                                                                category.categoryData.map((ele, e) => {
-                                                                    if (expens.category == ele._id) {
+                                                                category && category.categoryData.length>0 ? category.categoryData.map((ele, e) => {
+                                                                    if (expens.category === ele._id) {
                                                                         return ele.isDelete? <p key={e} className="line-through">{ele.title}</p> : <p key={e}>{ele.title}</p>
                                                                     }
-                                                                })
+                                                                    return null
+                                                                }) : <p>Create Category</p>
                                                             }
                                                         </Typography>
                                                     </div>
@@ -159,9 +154,10 @@ export function ExpenseTable() {
                                                         <Typography variant="small" color="blue-gray" className="font-normal">
                                                             {
                                                                 category.categoryData.map((ele, e) => {
-                                                                    if (expens.category == ele._id) {
+                                                                    if (expens.category === ele._id) {
                                                                         return ele.isDelete? <p key={e} className="line-through">{ele.title}</p> : <p key={e}>{ele.title}</p>
                                                                     }
+                                                                    return null;
                                                                 })
                                                             }
                                                         </Typography>

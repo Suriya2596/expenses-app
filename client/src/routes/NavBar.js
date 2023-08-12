@@ -1,12 +1,12 @@
 import React from "react";
 import {
   Navbar,
-  MobileNav,
+  // MobileNav,
   Typography,
-  Button,
+  // Button,
   IconButton,
-  Card,
-  List,
+  // Card,
+  // List,
   ListItem,
   ListItemPrefix,
   Collapse,
@@ -75,7 +75,7 @@ export default function NavBar() {
         return (
           <ListItem key={el}>
             <ListItemPrefix>{eleLink.icon()}</ListItemPrefix>
-            {eleLink.path == "/logout" ? <span onClick={handleLogout}>{eleLink.name}</span> : <Link to={eleLink.path}>{eleLink.name}</Link>}
+            {eleLink.path === "/logout" ? <span onClick={handleLogout}>{eleLink.name}</span> : <Link to={eleLink.path}>{eleLink.name}</Link>}
           </ListItem>
         );
       })}

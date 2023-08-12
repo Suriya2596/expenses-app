@@ -3,7 +3,6 @@ import {
   Card,
   Input,
 } from "@material-tailwind/react";
-import axios from "axios"
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from "react-redux"
 import { loginUser } from '../../features/User/UserAction';
@@ -21,7 +20,7 @@ const LoginForm = () => {
     if (localStorage.getItem("token")) {
       navigate("/")
     }
-  }, [])
+  }, [navigate])
 
   const User = useSelector((state)=>{
     return state.user

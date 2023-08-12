@@ -5,7 +5,7 @@ import BaseURL from "../BaseURL"
 export const budgetCreate = createAsyncThunk("budget/create", async (data) => {
     // console.log(data)
     try {
-        const response = await axios.post(`http://localhost:3400/api/budget`, data,
+        const response = await axios.post(`${BaseURL}/budget`, data,
             { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } }
         )
         // console.log(response)           
@@ -18,7 +18,7 @@ export const budgetCreate = createAsyncThunk("budget/create", async (data) => {
         if (response.data.hasOwnProperty("keyValue")) {
             alert(`User is already created budget`)
         }
-        if (response.data.errors == "Invalid Token" || !response.data ) {
+        if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     } catch (error) {
@@ -28,7 +28,7 @@ export const budgetCreate = createAsyncThunk("budget/create", async (data) => {
 
 export const budgetList = createAsyncThunk("budget/list", async () => {
     try {
-        const response = await axios.get(`http://localhost:3400/api/budget`,
+        const response = await axios.get(`${BaseURL}/budget`,
             { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } }
         )
         // console.log(response)
@@ -38,7 +38,7 @@ export const budgetList = createAsyncThunk("budget/list", async () => {
         if (response.data.hasOwnProperty("_id")) {
             return response.data
         }
-        if (response.data.errors == "Invalid Token" || !response.data ) {
+        if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     } catch (error) {
@@ -49,7 +49,7 @@ export const budgetList = createAsyncThunk("budget/list", async () => {
 
 export const budgetUpdate = createAsyncThunk("budget/update", async (req) => {
     try {
-        const response = await axios.put(`http://localhost:3400/api/budget`,req.data,
+        const response = await axios.put(`${BaseURL}/budget`,req.data,
             { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } }
         )
         // console.log(response)
@@ -62,7 +62,7 @@ export const budgetUpdate = createAsyncThunk("budget/update", async (req) => {
         if (response.data.hasOwnProperty("_id")) {
             return response.data
         }
-        if (response.data.errors == "Invalid Token" || !response.data ) {
+        if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     } catch (error) {

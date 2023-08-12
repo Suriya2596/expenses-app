@@ -4,7 +4,6 @@ import {
   CardBody,
   CardFooter,
   Button,
-  Input,
 } from "@material-tailwind/react";
 import { MoonIcon } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +17,7 @@ export default function BudgetMain() {
 
   React.useEffect(() => {
     dispatch(budgetList())
-  }, [])
+  }, [dispatch])
 
   const handleEditBudget = () => {
     setEditBudget(!editBudget)

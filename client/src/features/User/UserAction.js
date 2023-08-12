@@ -5,7 +5,7 @@ import BaseURL from "../BaseURL";
 
 export const registerUser = createAsyncThunk("user/register", async (req) => {
     try {
-        const response = await axios.post(`http://localhost:3400/api/user/register`, req.data)
+        const response = await axios.post(`${BaseURL}/user/register`, req.data)
         // console.log(response.data)
         if (response.data.hasOwnProperty("errors")) {
             alert(JSON.stringify(response.data.message))
@@ -26,7 +26,7 @@ export const registerUser = createAsyncThunk("user/register", async (req) => {
 
 export const loginUser = createAsyncThunk("user/login", async (res) => {
     try {
-        const response = await axios.post(`http://localhost:3400/api/user/login`, res.data)
+        const response = await axios.post(`${BaseURL}/user/login`, res.data)
         // console.log(response.data)
         if (response.data.hasOwnProperty("token")) {
             res.resolve()
@@ -38,7 +38,7 @@ export const loginUser = createAsyncThunk("user/login", async (res) => {
         if (response.data.hasOwnProperty("token")) {
             return response.data
         }
-        if (response.data.errors == "Invalid Token" || !response.data ) {
+        if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     } catch (error) {
@@ -48,7 +48,7 @@ export const loginUser = createAsyncThunk("user/login", async (res) => {
 
 export const accountUser = createAsyncThunk("user/account", async () => {
     try {
-        const response = await axios.get(`http://localhost:3400/api/user/account`, { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } })
+        const response = await axios.get(`${BaseURL}/user/account`, { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } })
         console.log(response.data)
         if (Object.keys(response.data).length > 0 && response.data.errors === "Invalid Token" && response.data == null) {
             localStorage.removeItem("token")
@@ -56,7 +56,7 @@ export const accountUser = createAsyncThunk("user/account", async () => {
         if (response.data.hasOwnProperty("_id")) {
             return response.data
         }
-        if (response.data.errors == "Invalid Token" || !response.data ) {
+        if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     } catch (error) {
@@ -66,7 +66,7 @@ export const accountUser = createAsyncThunk("user/account", async () => {
 
 export const updateUser = createAsyncThunk("user/update", async (resData) => {
     try {
-        const response = await axios.put("http://localhost:3400/api/user/update", resData.data,
+        const response = await axios.put(`${BaseURL}/user/update`, resData.data,
             { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } }
         )
         // console.log(response.data)
@@ -79,7 +79,7 @@ export const updateUser = createAsyncThunk("user/update", async (resData) => {
         if (response.data.hasOwnProperty("errors")) {
             alert(response.data.message)
         }
-        if (response.data.errors == "Invalid Token" || !response.data ) {
+        if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     } catch (error) {

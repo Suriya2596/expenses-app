@@ -10,7 +10,7 @@ const ProfileDetails = () => {
 
     React.useEffect(() => {
         dispatch(accountUser())
-    }, [])
+    }, [dispatch])
 
     const user = useSelector((state) => {
         return state.user

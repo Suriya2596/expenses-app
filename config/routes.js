@@ -36,10 +36,12 @@ routes.delete("/api/category/:id",authentication,authorization,categoryControlle
 // expenses routes
 routes.post("/api/expenses",authentication,expensesController.create)
 routes.get("/api/expenses",authentication,expensesController.list)
+routes.get("/api/expenses/totalExpesnse",authentication,expensesController.totalExpesnse)
 routes.get("/api/expenses/deleted",authentication,expensesController.listDelete)
 routes.get("/api/expenses/undeleted",authentication,expensesController.listUndelete)
 routes.get("/api/expenses/:id",authentication,expensesController.show)
 routes.put("/api/expenses/:id",authentication,expensesController.update)
+// budget - total expesnse  //  categie via expesnse value
 routes.delete("/api/expenses/:id",authentication,authorization,expensesController.destroy)
 
 module.exports = routes

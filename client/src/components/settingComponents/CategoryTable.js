@@ -8,12 +8,7 @@ import {
     Typography,
     Button,
     CardBody,
-    Chip,
     CardFooter,
-    Tabs,
-    TabsHeader,
-    Tab,
-    Avatar,
     IconButton,
     Tooltip,
 } from "@material-tailwind/react";
@@ -113,7 +108,7 @@ export function CategoryTable() {
                                                     <div className="flex items-center gap-1">
                                                         <div className="flex flex-col">
                                                             {
-                                                                (editCat && cateid == cate._id) ? <CategoryForm handleCategory={handleCategory} _id={cate._id} title={cate.title} handleEditCat={handleEditCat} editCat={editCat} setcateid={setcateid} /> :
+                                                                (editCat && cateid === cate._id) ? <CategoryForm handleCategory={handleCategory} _id={cate._id} title={cate.title} handleEditCat={handleEditCat} editCat={editCat} setcateid={setcateid} /> :
                                                                     <Typography variant="small" color="blue-gray" className="font-normal">
                                                                         {cate.title}
                                                                     </Typography>
@@ -159,7 +154,7 @@ export function CategoryTable() {
                                                     <div className="flex items-center gap-3">
                                                         <div className="flex flex-col">
                                                             {
-                                                                (editCat && cateid == cate._id) ? <CategoryForm handleCategory={handleCategory} _id={cate._id} title={cate.title} handleEditCat={handleEditCat} editCat={editCat} setcateid={setcateid} /> :
+                                                                (editCat && cateid === cate._id) ? <CategoryForm handleCategory={handleCategory} _id={cate._id} title={cate.title} handleEditCat={handleEditCat} editCat={editCat} setcateid={setcateid} /> :
                                                                     <Typography variant="small" color="blue-gray" className="font-normal">
                                                                         {cate.title}
                                                                     </Typography>

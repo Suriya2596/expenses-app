@@ -1,9 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import BaseURL from "../BaseURL";
 
 export const expensesCreate = createAsyncThunk("expenses/create",async(req)=>{
     try{
-        const response = await axios.post(`http://localhost:3400/api/expenses`, req.data, {
+        const response = await axios.post(`${BaseURL}/expenses`, req.data, {
             headers: {
                 "Authorization": JSON.parse(localStorage.getItem("token"))
             }
@@ -23,7 +24,7 @@ export const expensesCreate = createAsyncThunk("expenses/create",async(req)=>{
         if (response.data.hasOwnProperty("keyValue")) {
             alert(`already created budget`)
         }
-        if (response.data.errors == "Invalid Token" || !response.data ) {
+        if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     }catch(err){
@@ -33,7 +34,7 @@ export const expensesCreate = createAsyncThunk("expenses/create",async(req)=>{
 
 export const expensesList = createAsyncThunk("expenses/list",async()=>{
     try{
-        const response = await axios.get(`http://localhost:3400/api/expenses`, {
+        const response = await axios.get(`${BaseURL}/expenses`, {
             headers: {
                 "Authorization": JSON.parse(localStorage.getItem("token"))
             }
@@ -50,7 +51,7 @@ export const expensesList = createAsyncThunk("expenses/list",async()=>{
         if (response.data.hasOwnProperty("keyValue")) {
             alert(`already created`)
         }
-        if (response.data.errors == "Invalid Token" || !response.data ) {
+        if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
         }
     }catch(err){

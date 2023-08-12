@@ -49,7 +49,7 @@ const CategorySlice = createSlice({
             state.loading = false
             state.error = null
             state.categoryData = state.categoryData.map((category)=>{
-                if(category._id==action.payload._id){
+                if(category._id===action.payload._id){
                     return { ...category, ...action.payload }
                 }else{
                     return {...category}

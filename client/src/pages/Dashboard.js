@@ -13,11 +13,11 @@ const Dashboard = () => {
     if(!localStorage.getItem("token")){
       navigate("/login")
     }
-  },[])
+  },[navigate])
 
   React.useEffect(()=>{
     dispatch(accountUser())
-  },[])
+  },[dispatch])
 
   const user = useSelector((state)=>{
     return state.user
