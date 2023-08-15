@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { categoryCreate, categoryList, categoryUpdate } from "./CategoryAction";
+import { categoriestLogout, categoryCreate, categoryList, categoryUpdate } from "./CategoryAction";
 
 const CategorySlice = createSlice({
     name:"category",
@@ -55,6 +55,11 @@ const CategorySlice = createSlice({
                     return {...category}
                 }
             })
+        })
+        .addCase(categoriestLogout,(state)=>{
+            state.categoryData = []
+            state.error = null
+            state.loading = false
         })
     }
 })

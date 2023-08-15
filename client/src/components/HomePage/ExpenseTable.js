@@ -12,10 +12,10 @@ import {
     IconButton,
     Tooltip,
 } from "@material-tailwind/react";
-import { expensesCreate } from "../../features/Expenses/ExpensesAction";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryList } from "../../features/category/CategoryAction";
-import { expensesList } from "../../features/Expenses/ExpensesAction";
+import { expensesList, expensesUpdate } from "../../features/Expenses/ExpensesAction";
+import ExpesnseEditModel from "./ExpesnseEditModel";
 
 
 export function ExpenseTable() {
@@ -23,11 +23,7 @@ export function ExpenseTable() {
     const dispatch = useDispatch()
     const [showDeletedExp, setShowDeletedExp] = React.useState(false)
     const [open, setOpen] = React.useState(false);
-    const [expId, setExpId] = React.useState("")
-    const [title, setTitle] = React.useState("")
-    const [amount, setAmount] = React.useState("")
-    const [expenseDate, setExpenseDate] = React.useState("")
-    const [categoryId, setCategory] = React.useState("")
+    const [exp, setExp] = React.useState("")
 
     React.useEffect(() => {
         dispatch(expensesList())
@@ -36,10 +32,6 @@ export function ExpenseTable() {
 
 
     const handleOpen = () => setOpen(!open);
-
-    const handleFormSubmit = (req) => {
-        dispatch(expensesCreate(req))
-    }
 
     const expenses = useSelector((state) => {
         return state.expenses
@@ -55,8 +47,21 @@ export function ExpenseTable() {
 
     const TABLE_HEAD = ["Expense name", "Category name", "Amount", "Date", "Edit", "Action"];
 
+    const handleDelete = (_id,value)=>{
+        const data = {
+            isDeleted: value
+        }
+        const resolve = () => {
+
+        }
+        const req = {
+            data, resolve, _id
+        }
+        dispatch(expensesUpdate(req))
+    }
+
     return (
-        <form>
+        <>
             <Card className="h-full w-full my-6">
                 <CardHeader floated={false} shadow={false} className="rounded-none">
                     <div className="mb-8 flex items-center justify-between gap-8">
@@ -96,109 +101,124 @@ export function ExpenseTable() {
                         </thead>
                         {
                             <tbody>
-                                {expenses && expenses.expensesdata.length > 0 && [...expenses.expensesdata].reverse().map((expens, index) => {
+                                {!showDeletedExp && expenses && expenses.expensesdata.length > 0 && [...expenses.expensesdata].reverse().map((expens, index) => {
                                     return (
-                                        !showDeletedExp && !expens.isDelete && (
+                                        (!expens.isDeleted && (
                                             <tr key={index}>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
-                                                    {
-                                                        (open && expId == expens._id) ? "" : <div className="flex flex-col">
-                                                            <Typography variant="small" color="blue-gray" className="font-normal">
-                                                                {expens.title}
-                                                            </Typography>
-                                                        </div>
-                                                    }
-                                                    {
-                                                        open && expId == expens._id && <div>
-                                                            <Input size="lg" label="Title" type="text" name="title" value={title} onChange={(e) => {
-                                                                setTitle(e.target.value)
-                                                            }} />
-                                                        </div>
-                                                    }
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {expens.title}
+                                                        </Typography>
+                                                    </div>
                                                 </td>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
-                                                    {
-                                                        (open && expId == expens._id) ? "" : <div className="flex flex-col">
-                                                            <Typography variant="small" color="blue-gray" className="font-normal">
-                                                                {
-                                                                    category && category.categoryData.length > 0 ? category.categoryData.map((ele, e) => {
-                                                                        if (expens.category === ele._id) {
-                                                                            return ele.isDelete ? <p key={e} className="line-through">{ele.title}</p> : <p key={e}>{ele.title}</p>
-                                                                        }
-                                                                        return null
-                                                                    }) : <p>Create Category</p>
-                                                                }
-                                                            </Typography>
-                                                        </div>
-                                                    }
-                                                    {
-                                                        open && expId == expens._id && <div>
-                                                            {/* <label htmlFor="categories" className="text-[12px] mb-1">Select Category</label> */}
-                                                            <select id={"categories"} className="p-2 w-full outline-none border-2 rounded-[6px]" label="Select Category" value={categoryId} onChange={(e) => {
-                                                                setCategory(e.target.value)
-                                                            }}>
-                                                                <option value="ksv">Select...</option>
-                                                                {category && category.categoryData.length > 0 &&
-                                                                    category.categoryData.map((cate) => (
-                                                                        !cate.isDelete && <option key={cate._id} value={cate._id}>
-                                                                            {cate.title}
-                                                                        </option>
-                                                                    ))}
-                                                            </select>
-                                                        </div>
-                                                    }
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {
+                                                                category && category.categoryData.length > 0 ? category.categoryData.map((ele, e) => {
+                                                                    if (expens.category === ele._id) {
+                                                                        return ele.isDelete ? <p key={e} className="line-through">{ele.title}</p> : <p key={e}>{ele.title}</p>
+                                                                    }
+                                                                    return null
+                                                                }) : <p>Create Category</p>
+                                                            }
+                                                        </Typography>
+                                                    </div>
                                                 </td>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
-                                                    {
-                                                        (open && expId == expens._id) ? "" : <div className="flex flex-col">
-                                                            <Typography variant="small" color="blue-gray" className="font-normal">
-                                                                {expens.amount}
-                                                            </Typography>
-                                                        </div>
-                                                    }
-
-                                                    {
-                                                        open && expId == expens._id && <div>
-                                                            <Input size="lg" label="Amount" type="number" value={amount} onChange={(e) => {
-                                                                setAmount(e.target.value)
-                                                            }} />
-                                                        </div>
-                                                    }
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {expens.amount}
+                                                        </Typography>
+                                                    </div>
                                                 </td>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
-                                                    {
-                                                        (open && expId == expens._id) ? "" : <div className="flex flex-col">
-                                                            <Typography variant="small" color="blue-gray" className="font-normal">
-                                                                {expens.createdAt}
-                                                            </Typography>
-                                                        </div>
-                                                    }
-
-                                                    {
-                                                        open && expId == expens._id && <div>
-                                                            <Input type="date" size="lg" label="Expense Date" value={expenseDate} onChange={(e) => {
-                                                                setExpenseDate(e.target.value)
-                                                            }} />
-                                                        </div>
-                                                    }
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {expens.createdAt}
+                                                        </Typography>
+                                                    </div>
                                                 </td>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
                                                     <Tooltip content="Edit User">
                                                         <IconButton variant="text" color="blue-gray">
                                                             <PencilIcon className="h-4 w-4" onClick={() => {
                                                                 handleOpen()
-                                                                setExpId(expens._id)
+                                                                setExp(expens)
                                                             }} />
                                                         </IconButton>
                                                     </Tooltip>
                                                 </td>
                                                 <td className={"p-4 border-b border-blue-gray-50"}>
-                                                    <Typography variant="small" color="blue-gray" className="hover:text-blue-800 cursor-pointer">
+                                                    <Typography variant="small" color="blue-gray" className="hover:text-blue-800 cursor-pointer" onClick={()=>{
+                                                        handleDelete(expens._id,true)
+                                                    }}>
                                                         Delete
                                                     </Typography>
                                                 </td>
                                             </tr>
-                                        )
+                                        ))
+                                    )
+                                })}
+                                 {showDeletedExp && expenses && expenses.expensesdata.length > 0 && [...expenses.expensesdata].reverse().map((expens, index) => {
+                                    return (
+                                        (expens.isDeleted && (
+                                            <tr key={index}>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {expens.title}
+                                                        </Typography>
+                                                    </div>
+                                                </td>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {
+                                                                category && category.categoryData.length > 0 ? category.categoryData.map((ele, e) => {
+                                                                    if (expens.category === ele._id) {
+                                                                        return ele.isDelete ? <p key={e} className="line-through">{ele.title}</p> : <p key={e}>{ele.title}</p>
+                                                                    }
+                                                                    return null
+                                                                }) : <p>Create Category</p>
+                                                            }
+                                                        </Typography>
+                                                    </div>
+                                                </td>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {expens.amount}
+                                                        </Typography>
+                                                    </div>
+                                                </td>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {expens.createdAt}
+                                                        </Typography>
+                                                    </div>
+                                                </td>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <Tooltip content="Edit User">
+                                                        <IconButton variant="text" color="blue-gray">
+                                                            <PencilIcon className="h-4 w-4" onClick={() => {
+                                                                handleOpen()
+                                                                setExp(expens)
+                                                            }} />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </td>
+                                                <td className={"p-4 border-b border-blue-gray-50"}>
+                                                    <Typography variant="small" color="blue-gray" className="hover:text-blue-800 cursor-pointer" onClick={()=>{
+                                                        handleDelete(expens._id,false)
+                                                    }}>
+                                                        Un-Delete
+                                                    </Typography>
+                                                </td>
+                                            </tr>
+                                        ))
                                     )
                                 })}
                             </tbody>
@@ -219,7 +239,9 @@ export function ExpenseTable() {
                     </div>
                 </CardFooter>
             </Card>
-
-        </form>
+            {
+                open && <ExpesnseEditModel open={open} handleOpen={handleOpen} exp={exp}/>
+            }
+        </>
     );
 }

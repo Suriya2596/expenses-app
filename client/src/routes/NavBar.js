@@ -23,6 +23,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogout } from "../features/User/UserAction";
 import { budgetLogout } from "../features/Budget/BudgetAction";
+import { expesnestLogout } from "../features/Expenses/ExpensesAction";
+import { categoriestLogout } from "../features/category/CategoryAction";
 
 export default function NavBar() {
   const navigate = useNavigate()
@@ -64,6 +66,8 @@ export default function NavBar() {
     navigate("/login")
     dispatch(userLogout())
     dispatch(budgetLogout())
+    dispatch(expesnestLogout())
+    dispatch(categoriestLogout())
   }
 
 

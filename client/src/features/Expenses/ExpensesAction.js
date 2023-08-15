@@ -59,6 +59,36 @@ export const expensesList = createAsyncThunk("expenses/list",async()=>{
     }
 })
 
+export const expensesUpdate = createAsyncThunk("expenses/update",async(req)=>{
+    try{
+        const response = await axios.put(`${BaseURL}/expenses/${req._id}`, req.data, {
+            headers: {
+                "Authorization": JSON.parse(localStorage.getItem("token"))
+            }
+        })
+        // console.log(response.data)
+        const data = response.data
+        if (data.hasOwnProperty("_id")) {
+            req.resolve()
+        }
+        if (data.hasOwnProperty("_id")) {
+            return data
+        }
+        // errors
+        if (response.data.hasOwnProperty("errors")) {
+            alert(response.data.message)
+        }
+        if (response.data.hasOwnProperty("keyValue")) {
+            alert(`already created budget`)
+        }
+        if (response.data.errors === "Invalid Token" || !response.data ) {
+            localStorage.removeItem("token")
+        }
+    }catch(err){
+        alert(`${err.message}`)
+    }
+})
+
 export const totalBudgetExpesnse = createAsyncThunk("expenses/totalBudgetExpesnse",async()=>{
     try{
         const response = await axios.get(`${BaseURL}/expenses/totalExpesnse`, {
@@ -85,3 +115,9 @@ export const totalBudgetExpesnse = createAsyncThunk("expenses/totalBudgetExpesns
         alert(`${err.message}`)
     }
 })
+
+
+// logou
+export const expesnestLogout = () => {
+    return { type: "user/logout" };
+};

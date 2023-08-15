@@ -90,3 +90,8 @@ export const categoryUpdate = createAsyncThunk("category/update", async (req) =>
         alert(`${err.message}`)
     }
 })
+
+// logou
+export const categoriestLogout = () => {
+    return { type: "user/logout" };
+};
