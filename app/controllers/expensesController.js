@@ -90,7 +90,8 @@ expensesController.totalExpesnse = (req, res) => {
                 .then((budget) => {
                     const totalBudget = parseInt(budget.total)
                     const totalPercentage = (totalExpense / totalBudget) * 100;
-                    res.json({ totalPercentage, totalExpense, totalBudget })
+                    const remainingBudget = totalBudget - totalExpense
+                    res.json({ totalPercentage, totalExpense, totalBudget ,remainingBudget})
                 })
                 .catch((err) => {
                     res.json(err)

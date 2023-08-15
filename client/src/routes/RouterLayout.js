@@ -9,12 +9,12 @@ const RouterLayout = () => {
             <div className=''>
                 {
                     localStorage.getItem("token") && (
-                        <section className='max-w-screen-lg mx-auto'>
+                        <section className='max-w-screen-xl mx-auto'>
                             <NavBar />
                         </section>
                     )
                 }
-                <main className='max-w-screen-lg mx-auto'>
+                <main className='max-w-screen-xl mx-auto'>
                     <Outlet />
                 </main>
             </div>

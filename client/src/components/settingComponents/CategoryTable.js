@@ -20,6 +20,8 @@ import CategoryForm from "./CategoryForm";
 export function CategoryTable() {
 
     const dispatch = useDispatch()
+    const [searchData, setSearchData] = React.useState("")
+    const [filterData, setFilterData] = React.useState([])
     const [editCat, setEditCat] = React.useState(false)
     const [cateid, setcateid] = React.useState("")
     const [showDeletedCat, setShowDeletedCat] = React.useState("")
@@ -59,6 +61,15 @@ export function CategoryTable() {
 
     const TABLE_HEAD = ["Category name", "Date", "Edit", "Action",];
 
+    React.useEffect(() => {
+        if (category.categoryData && category.categoryData.length > 0) {
+            const result = category.categoryData.filter((cat) => {
+                return cat.title.includes(searchData)
+            })
+            setFilterData(result)
+        }
+    }, [searchData,category])
+
     return (
         <Card className="h-full w-full">
             <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -71,7 +82,9 @@ export function CategoryTable() {
                 </div>
                 <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
                     <div className="w-full md:w-72">
-                        <Input label="Search" icon={<MagnifyingGlassIcon className="h-5 w-5" />} />
+                        <Input label="Search" onChange={(e) => {
+                            setSearchData(e.target.value)
+                        }} icon={<MagnifyingGlassIcon className="h-5 w-5" />} />
                     </div>
                     <div>
                         <Button variant="gradient" color="blue-gray" size="sm" onClick={handleShowDeletedCat}>
@@ -100,7 +113,7 @@ export function CategoryTable() {
                     {
                         showDeletedCat ? (
                             <tbody>
-                                {category && category.categoryData.length > 0 && [...category.categoryData].reverse().map((cate, index) => {
+                                {filterData.length > 0 && [...filterData].reverse().map((cate, index) => {
                                     return (
                                         cate.isDelete && (
                                             <tr key={index}>
@@ -146,7 +159,7 @@ export function CategoryTable() {
                             </tbody>
                         ) : (
                             <tbody>
-                                {category && category.categoryData.length > 0 && [...category.categoryData].reverse().map((cate, index) => {
+                                {filterData.length > 0 && [...filterData].reverse().map((cate, index) => {
                                     return (
                                         !cate.isDelete && (
                                             <tr key={index}>

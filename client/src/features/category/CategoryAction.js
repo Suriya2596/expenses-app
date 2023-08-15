@@ -42,7 +42,7 @@ export const categoryList = createAsyncThunk("category/list", async () => {
         })
         // console.log(response.data)
         const data = response.data
-        if (data.length > 0) {
+        if (data) {
             return data
         }
         // errors

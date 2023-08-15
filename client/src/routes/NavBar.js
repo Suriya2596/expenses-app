@@ -83,7 +83,7 @@ export default function NavBar() {
   );
 
   return (
-    <Navbar className="py-2 px-4 lg:px-8 lg:py-4 bg-[#100E0E] mx-auto border-0">
+    <Navbar className="py-2 px-4 xl:px-0 lg:py-4 bg-[#100E0E] mx-auto border-0">
       <div className="container mx-auto flex items-center justify-between text-white ">
         <Typography
           as="a"

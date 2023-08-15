@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import BaseURL from "../BaseURL";
+import { useNavigate } from "react-router-dom";
 
 
 export const registerUser = createAsyncThunk("user/register", async (req) => {
@@ -40,6 +41,7 @@ export const loginUser = createAsyncThunk("user/login", async (res) => {
         }
         if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
+            useNavigate("/login")
         }
     } catch (error) {
         throw new Error(error.response.data.message)
@@ -49,15 +51,13 @@ export const loginUser = createAsyncThunk("user/login", async (res) => {
 export const accountUser = createAsyncThunk("user/account", async () => {
     try {
         const response = await axios.get(`${BaseURL}/user/account`, { headers: { "Authorization": JSON.parse(localStorage.getItem("token")) } })
-        console.log(response.data)
-        if (Object.keys(response.data).length > 0 && response.data.errors === "Invalid Token" && response.data == null) {
-            localStorage.removeItem("token")
-        }
+        // console.log(response.data)
         if (response.data.hasOwnProperty("_id")) {
             return response.data
         }
         if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
+            useNavigate("/login")
         }
     } catch (error) {
         throw new Error(error.response.data.message)
@@ -81,6 +81,7 @@ export const updateUser = createAsyncThunk("user/update", async (resData) => {
         }
         if (response.data.errors === "Invalid Token" || !response.data ) {
             localStorage.removeItem("token")
+            useNavigate("/login")
         }
     } catch (error) {
         throw new Error(error.response.data.message)

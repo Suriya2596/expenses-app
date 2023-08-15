@@ -7,21 +7,23 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryList } from "../../features/category/CategoryAction";
-import { expensesCreate } from "../../features/Expenses/ExpensesAction";
+import { totalBudgetExpesnse } from "../../features/Expenses/ExpensesAction";
 
-export function ExpensesForm({ handleOpen }) {
+export function ExpensesForm({ handleOpen,handleFormSubmit}) {
     const dispatch = useDispatch()
+
     React.useEffect(() => {
         dispatch(categoryList())
     }, [dispatch])
+
     const categories = useSelector((state) => {
         return state.category
     })
+    
     const [title, setTitle] = React.useState("")
     const [amount, setAmount] = React.useState("")
     const [expenseDate, setExpenseDate] = React.useState("")
     const [category, setCategory] = React.useState("")
-
     const [formError, setFormError] = React.useState({})
     let formErr = {}
 
@@ -31,6 +33,7 @@ export function ExpensesForm({ handleOpen }) {
         setExpenseDate("")
         setCategory("")
         handleOpen()
+        dispatch(totalBudgetExpesnse())
     }
 
     const handleFormError = () => {
@@ -58,9 +61,9 @@ export function ExpensesForm({ handleOpen }) {
                 title, amount, expenseDate, category
             }
             const req = {
-                data,resolve
+                data, resolve
             }
-            dispatch(expensesCreate(req))
+            handleFormSubmit(req)
         }
     }
 
@@ -97,14 +100,14 @@ export function ExpensesForm({ handleOpen }) {
                     </div>
                     <div>
                         <label htmlFor="categories" className="text-[14px] mb-1">Select Category</label>
-                        <select id={"categories"} className="p-2 w-full outline-none border-2 rounded-[6px]" label="Select Category" value={category} onChange={(e)=>{
+                        <select id={"categories"} className="p-2 w-full outline-none border-2 rounded-[6px]" label="Select Category" value={category} onChange={(e) => {
                             setCategory(e.target.value)
                             delete formError.category
                         }}>
                             <option value="ksv">Select...</option>
                             {categories && categories.categoryData.length > 0 &&
                                 categories.categoryData.map((cate) => (
-                                    <option key={cate._id} value={cate._id}>
+                                    !cate.isDelete && <option key={cate._id} value={cate._id}>
                                         {cate.title}
                                     </option>
                                 ))}

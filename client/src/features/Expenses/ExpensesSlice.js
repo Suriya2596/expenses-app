@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
-import { expensesCreate, expensesList } from "./ExpensesAction"
+import { expensesCreate, expensesList, totalBudgetExpesnse } from "./ExpensesAction"
 
 
 const expensesSlice = createSlice({
@@ -7,7 +7,8 @@ const expensesSlice = createSlice({
     initialState:{
         loading:false,
         error:null,
-        expensesdata:[]
+        expensesdata:[],
+        totalExpesnse:{}
     },
     reducers:{},
     extraReducers:(builder)=>{
@@ -35,6 +36,19 @@ const expensesSlice = createSlice({
             state.error = null
         })
         .addCase(expensesList.rejected,(state,action)=>{
+            state.loading =false
+            state.error = action.payload
+        })
+        // totalBudgetExpesnse
+        .addCase(totalBudgetExpesnse.pending,(state)=>{
+            state.loading = true
+        })
+        .addCase(totalBudgetExpesnse.fulfilled,(state,action)=>{
+            state.loading =false
+            state.totalExpesnse = action.payload
+            state.error = null
+        })
+        .addCase(totalBudgetExpesnse.rejected,(state,action)=>{
             state.loading =false
             state.error = action.payload
         })
