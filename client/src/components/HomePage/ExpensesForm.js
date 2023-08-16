@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { categoryList } from "../../features/category/CategoryAction";
 import { totalBudgetExpesnse } from "../../features/Expenses/ExpensesAction";
 
-export function ExpensesForm({ handleOpen, handleFormSubmit, exp }) {
+export function ExpensesForm({ handleOpen, handleFormSubmit, _id,title:Atitle ,amount:Aamount,expenseDate:AexpenseDate,category:Acategory}) {
     const dispatch = useDispatch()
 
     React.useEffect(() => {
@@ -20,10 +20,10 @@ export function ExpensesForm({ handleOpen, handleFormSubmit, exp }) {
         return state.category
     })
 
-    const [title, setTitle] = React.useState(exp.title?exp.title:"")
-    const [amount, setAmount] = React.useState(exp.amount?exp.amount:"")
-    const [expenseDate, setExpenseDate] = React.useState(exp.expenseDate?exp.expenseDate.slice(0, 10):"")
-    const [category, setCategory] = React.useState(exp.category?exp.category:"")
+    const [title, setTitle] = React.useState(Atitle?Atitle:"")
+    const [amount, setAmount] = React.useState(Aamount?Aamount:"")
+    const [expenseDate, setExpenseDate] = React.useState(AexpenseDate?AexpenseDate.slice(0, 10):"")
+    const [category, setCategory] = React.useState(Acategory?Acategory:"")
     const [formError, setFormError] = React.useState({})
     let formErr = {}
 
@@ -61,7 +61,7 @@ export function ExpensesForm({ handleOpen, handleFormSubmit, exp }) {
                 title, amount, expenseDate, category
             }
             const req = {
-                data, resolve,_id:exp._id
+                data, resolve,_id
             }
             handleFormSubmit(req)
         }
