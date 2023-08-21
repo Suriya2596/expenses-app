@@ -1,4 +1,10 @@
 # expenses-app
+### Expenses-app
+1. The "expenses-app" facilitates efficient budget management for users.
+2. Users are empowered to establish distinct categories for expense organization.
+3. Within these designated categories, users can seamlessly append individual expenses.
+4. The app offers the flexibility to modify or remove specific expense entries.
+5. Users also have the capability to incorporate daily expenses, ensuring a comprehensive financial record.
 
 ### Step 1: Clone the Repository
 1. Run the command: git clone https://github.com/Suriya2596/expenses-app.
