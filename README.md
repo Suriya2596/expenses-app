@@ -23,3 +23,8 @@
 2. Login with your credentials to start using the application.
 
 ## Feel free to follow these steps to successfully set up and use the Expenses App.
+
+## Sample Image
+
+![Sample Image](client/src/asstes/images/img1.png)
+![Sample Image](client/src/asstes/images/img2.png)
