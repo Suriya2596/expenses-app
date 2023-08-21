@@ -6,8 +6,9 @@
 4. The app offers the flexibility to modify or remove specific expense entries.
 5. Users also have the capability to incorporate daily expenses, ensuring a comprehensive financial record.
 
-### Step 1: Clone the Repository
-1. Run the command: git clone https://github.com/Suriya2596/expenses-app.
+### Step 1: Install Node.js on Your PC and Clone the Repository
+1. Download the appropriate version of Node.js for your PC from https://nodejs.org/en/download.
+2. Run the command: git clone https://github.com/Suriya2596/expenses-app.
 
 ### Step 2: Setting Up the Backend
 1. Open the project in Visual Studio.
