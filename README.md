@@ -26,5 +26,5 @@
 
 ## Sample Image
 
-![Sample Image](client/src/asstes/images/img1.png)
 ![Sample Image](client/src/asstes/images/img2.png)
+![Sample Image](client/src/asstes/images/img1.png)
