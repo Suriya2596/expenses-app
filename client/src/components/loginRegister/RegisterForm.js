@@ -137,20 +137,11 @@ export default function RegisterForm() {
             </div>
 
           </div>
-          {/* <Checkbox
-          label={
-            (
-              <p>
-                I agree the &nbsp;Terms and Conditions
-              </p>
-            )
-          }
-          containerProps={{ className: "-ml-2.5" }}
-          color="yellow"
-        /> */}
+              
           <button className="px-12 text-center font-bold py-4 text-black bg-[#FECE2F] rounded-[4px] w-[100%] mt-6" >
             Register
           </button>
+              
           <Typography color="gray" className="mt-4 text-center font-normal">
             Already have an account?{" "}
             <Link to={"/login"}
@@ -159,6 +150,7 @@ export default function RegisterForm() {
               Sign In
             </Link>
           </Typography>
+              
         </form>
       </Card>
     </>
